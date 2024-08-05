@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="ad"></h1>
+    <script>
+        const ad = document.getElementById('ad')
+        const name = 'Sabina'
+        let arr = []
+        let x = 0
+        let y = name.length
+        function anime() {
+            if (x < name.length) {
+                arr.push(name[x])
+                ad.innerHTML = arr.join('')
+                x++
+            } else {
+                arr.pop(name[y])
+                y--
+                ad.innerHTML = arr.join('')
+            }
+        }
+        const interval = setInterval(anime, 1000);
+    </script>
+</body>
+</html>
