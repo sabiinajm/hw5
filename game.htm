@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {border-collapse: collapse; margin: 10vh auto;}
+        td {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #333;
+            text-align: center;
+            font: bold 2em Arial;
+        }
+        #saat {text-align: center;}
+    </style>
+</head>
+<body>
+    <h2 id="saat"></h2>
+    <table id="cdv"></table>
+    
+    <script>
+        const cdv = document.getElementById('cdv')
+        let arr = []
+        let kod = ''
+        let order = 1
+        let timer = setInterval(count, 1000)
+        let saniye = 3
+        for (let i = 1; i <= 16; i++) {
+            arr.push(i)
+        }
+
+        for (let i = 1; i <= 4; i++) {
+            kod += '<tr>'
+            for (let j = 1; j <= 4; j++) {
+                let ind = rand(0, arr.length - 1)
+                kod += `<td onclick = "bozar(this)">${arr[ind]}</td>`
+                arr.splice(ind, 1)
+            }
+            kod += '</tr>'
+        }
+        cdv.innerHTML = kod
+        function count() {
+            if(saniye){
+                saat.innerHTML = saniye--
+            }else gameOver(false)
+        }
+        function gameOver(res){
+            clearInterval(timer)
+            if(res){
+                alert('aferin')
+            }else{
+                let tabledata = document.querySelectorAll('td')
+                let over = 'gameover'
+                let arrOver = []
+                order = 0
+                for (let i = 0; i < tabledata.length; i++) {
+                    tabledata[i].style.backgroundColor = '#333'
+                    tabledata[i].style.color = '#333'
+                    tabledata[i].onclick = null;
+                    for (let j = 0; j < over.length; j++) {
+                    arrOver.push(over[j])
+                    tabledata[j].innerHTML = arrOver[j]
+                    tabledata[j].style.color = 'yellow'
+                }
+        }
+    }
+    }
+        function bozar(td) {
+            if (td.innerHTML == order) {
+                td.style.backgroundColor = '#ddd'
+                td.style.color = '#aaa'
+                order++
+                if (order >16){
+                    gameOver (true)
+                }
+            }
+        }
+    function rand(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    </script>
+</body>
+
+</html>
